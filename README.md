@@ -5,7 +5,7 @@ AI powered microservice code generator (brought to you by prompt chain magic)
 
 Microservify is a simple Streamlit web app built around the core functionality of automating microservice code creation. Langchain is used for prompt templating and chaining, and Cohere's LLM models used as the generator. 
 
-As with existing LLM based tools, producing perfect code that does exactly what it needs to is hard for generative AI. The creativity and uniqueness of requirements is proportional to the amount of bugs and flawed logic for generated code- meaning humans are still needed to look over and edit the microservice code before pushing into service. The bulk initial work, though, can be automated to a fairly good degree.
+As with existing LLM based tools, producing perfect code that does exactly what it needs to is hard for generative AI. The creativity and uniqueness of requirements is proportional to the amount of bugs and flawed logic for generated code- meaning humans are still needed to look over and edit code before pushing into service. The bulk initial work, though, can be automated to a fairly good degree.
 
 What makes the microservices architecture kind of code components especially suited for AI generation? Typically small code sizes falling well within token limits for most LLM models, lack of requirement to understand the entirety of a more monolithic codebase sprawl, and a user can just include relevant information in the initial prompt. 
 
