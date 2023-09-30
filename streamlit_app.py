@@ -31,10 +31,20 @@ def microservice_outline(concept):
     prompt_query = prompt.format(concept=concept)
     #run llm model
     response = llm(prompt_query)
-    #print results
     return st.info(response)
 
-#todo: rest of the logic chain (generation + review)
+#second step of logic, generating the actual code from user prompt
+def microservice_code_generation(outline):
+    llm = Cohere(model_name="command-nightly", cohere_api_key=api_key)
+    #prompt 
+    template = "You are an expert programmer well versed with multiple programming languages and coding paradigms. You are very proficient at creating the microservice code from a given outline given to you that you have to follow, and you have to do this now. Here is the outline: {outline}. Generate the code."
+    prompt = PromptTemplate(input_variables=["topic"], template=template)
+    prompt_query = prompt.format(outline=outline)
+    #run llm model
+    response = llm(prompt_query)
+    return st.info(response)
+
+#todo: rest of the logic chain (review)
 
 with st.form("form1"):
     topic_text = st.text_input("Describe the concept/idea of the microservice you want generated:", "")
@@ -42,5 +52,8 @@ with st.form("form1"):
     if not api_key:
         st.info(f"Please enter your {selected_provider} API key first!")
     elif submitted:
-        microservice_outline(topic_text)
+        outline = microservice_outline(topic_text)
+        #send outline response to next step
+        microservice_code_generation(outline)
+
 
