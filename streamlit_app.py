@@ -16,6 +16,7 @@ st.header("Microservice Code Generator")
 with st.sidebar:
     selected_provider = st.selectbox("Pick an LLM provider", ["OpenAI", "Cohere"])
     api_key = st.text_input(f"Enter your {selected_provider} API Key", type="password")
+    selected_language = st.selectbox("Select a programming language", ["Python", "JavaScript", "Java", "C#", "Ruby", "Go", "Swift", "Other"])
     st.divider()
     st.subheader("About")
     st.write("Microservify is a microservice code generation tool, powered by the magic of generative large language models and prompt chaining. Enter an LLM provider API key, mention the microservice concept and functionality you require, and pick a programming language. Hit submit and let Microservify generate it for you!")
@@ -70,8 +71,8 @@ with st.form("form1"):
         llm = llm_instance(api_key, selected_provider)
         outline = microservice_outline(topic_text, llm)
         #send outline response to next step
-        generated_code = microservice_code_generation(outline, llm)
-        reviewed_code = microservice_code_checker(generated_code, llm)
+        generated_code = microservice_code_generation(outline, llm, selected_language)
+        reviewed_code = microservice_code_checker(generated_code, llm, selected_language)
 
 
 
